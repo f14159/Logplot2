@@ -1,0 +1,10 @@
+* Separation between data and windows.
+
+* Setters/getters in header.
+
+* private members: name_
+          getters: name()
+          setters: set_name()
+
+* CamelCase for (with initial capitalization) for class names,
+  under_scores for everything else.

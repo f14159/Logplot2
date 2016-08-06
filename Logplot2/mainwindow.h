@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
+#include "ui_settingsform.h"
 
 class MainWindow : public QMainWindow
 {
@@ -13,7 +14,8 @@ public:
 	~MainWindow();
 
 private:
-	Ui::MainWindowClass ui;
+	Ui::MainWindowClass ui_main;
+	//	Ui::SettingsForm ui_settingsform; // For connects
 };
 
 #endif // MAINWINDOW_H

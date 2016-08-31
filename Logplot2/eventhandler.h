@@ -15,20 +15,20 @@ Possible TODO: generalize constructor to be variadic (for generalization).
 class EventHandler : public QObject
 {
 public:
-	EventHandler(DataHandler&, Time&, Settings&, MainWindow&, SettingsForm&);
-	~EventHandler();
+//	EventHandler(DataHandler&, Time&, Settings&, MainWindow&, SettingsForm&);
+	EventHandler(DataHandler&, Settings&, MainWindow&, SettingsForm&);
+	~EventHandler() {}
 
 	void start_timer();
-
 	void stop_timer();
 
-	void make_default_connections();
+	void init_gui();
 	void make_default_configs();
 
 private:
 // Constructor members
 	DataHandler *dh_;
-	Time *t_;
+//	Time *t_;
 	Settings *settings_;
 	MainWindow *mw_;
 	SettingsForm *sf_;
@@ -41,6 +41,7 @@ private:
 	QTimer *timer_;
 
 // Functions
-
+	void add_graph(Ui::MainWindowClass&);
+	void add_timer();
 };
 

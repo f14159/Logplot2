@@ -2,48 +2,39 @@
 #include <QFile>
 #include <QString>
 #include <QVector>
+
 #include "settings.h"
+#include "data.h"
 
 class DataHandler
 {
 public:
-	DataHandler(Settings&);
-	~DataHandler();
+	DataHandler(Settings& s); 
+	~DataHandler() {}
 
-	void update_content();
-	QString current_line();
-	QString current_data();
-
+	int update_content();
+	void print_all();
+	QVector<Data> datas() { return datas_; }
 
 private:
-	QFile *input_file_;
 	Settings *settings_;
 
-	QString current_line_;
 	QVector<QString> file_content_;
+	QVector<QString> current_lines_; 
+	// should have length equivalent to number of datapoints to
+	// be plotted
 
-	QVector<double> current_data_;
-	// !! index 0 is always time
-	QVector<QVector<double>> data_; 
+	int file_length_;
+	int fields; // Of CSV formatted data
+//	QString current_line_;
+
+
+	QVector<Data> datas_;
 
 	// Functions
-	void read_file();
-	void extract_data();
+	int read_file();
+
 };
 
 
-// For storing the current time
-// !! Todo: add datetime
-class Time {
-public:
-	Time(Settings &s) { settings_ = &s; }
-	~Time() {};
-	void tick();
-	QVector<int> t_count() { return t_count_; }
 
-private:
-	Settings *settings_;
-	int ticks_;
-	QVector<int> t_count_;
-	QVector<int> t_ms_;
-};

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "settingsform.h"
+#include "data.h"
 #include "datahandler.h"
 #include "eventhandler.h"
 
@@ -10,19 +11,20 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 
 	// Model
-	Settings settings(QString("C:/users/love/Desktop/mate_out.csv"), 1000);
+	Settings settings(QString("C:/users/love/Desktop/mate_out.csv"), 100);
 	DataHandler dh(settings);
-	Time t(settings);
 
 	// View
 	MainWindow mw;
 	SettingsForm sf(&mw);
 
 	// Controller
-	EventHandler ev(dh, t, settings, mw, sf);
-	ev.make_default_connections();
+	EventHandler ev(dh, settings, mw, sf);
+	ev.init_gui();
 	ev.make_default_configs();
 
+	// Qt
 	mw.show();
 	return a.exec();
+
 }

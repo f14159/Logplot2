@@ -22,8 +22,8 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextBrowser>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "qcustomplot.h"
 
@@ -33,10 +33,11 @@ class Ui_MainWindowClass
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
     QSplitter *splitter;
     QCustomPlot *w_plot;
     QTextBrowser *textBrowser;
+    QTableWidget *t_data_toggles;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *b_start_stop;
     QSpacerItem *horizontalSpacer;
@@ -49,15 +50,12 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QStringLiteral("MainWindowClass"));
-        MainWindowClass->resize(572, 416);
+        MainWindowClass->resize(820, 671);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
+        splitter->setGeometry(QRect(10, 40, 551, 571));
         splitter->setOrientation(Qt::Vertical);
         w_plot = new QCustomPlot(splitter);
         w_plot->setObjectName(QStringLiteral("w_plot"));
@@ -68,13 +66,18 @@ public:
         textBrowser->setMaximumSize(QSize(16777215, 16777215));
         textBrowser->setStyleSheet(QStringLiteral(""));
         splitter->addWidget(textBrowser);
-
-        verticalLayout->addWidget(splitter);
-
-        horizontalLayout = new QHBoxLayout();
+        t_data_toggles = new QTableWidget(centralWidget);
+        t_data_toggles->setObjectName(QStringLiteral("t_data_toggles"));
+        t_data_toggles->setGeometry(QRect(590, 150, 211, 192));
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 0, 204, 25));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        b_start_stop = new QPushButton(centralWidget);
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        b_start_stop = new QPushButton(layoutWidget);
         b_start_stop->setObjectName(QStringLiteral("b_start_stop"));
 
         horizontalLayout->addWidget(b_start_stop);
@@ -83,18 +86,15 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        b_settings = new QPushButton(centralWidget);
+        b_settings = new QPushButton(layoutWidget);
         b_settings->setObjectName(QStringLiteral("b_settings"));
 
         horizontalLayout->addWidget(b_settings);
 
-
-        verticalLayout->addLayout(horizontalLayout);
-
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 572, 18));
+        menuBar->setGeometry(QRect(0, 0, 820, 18));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindowClass->setMenuBar(menuBar);
